@@ -13,7 +13,6 @@ module.exports = {
         const user = interaction.options.getUser('target');
         const guild = interaction.guild
         guild.members.ban(user);
-        user.roles.add(role);
 		await interaction.reply({ 
             embeds: [Embeds.mod('Banned User', `Banned: ${user} from Guild: ${guild}`)]
         })
