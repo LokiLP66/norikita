@@ -1,9 +1,41 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Intents } = require('discord.js');
-const { token } = require('./data/config.json');
+const { secrets } = require('./data/config.json');
+const Embeds = require('./messages/embeds');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ 
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+	partials: ['MESSAGE', 'CHANNEL', 'REACTION']
+});
+
+// ////////////////////////////////////////////////////////////////////
+// ReactionRole
+// ////////////////////////////////////////////////////////////////////
+
+client.on('messageReactionAdd', async (reaction, user) => {
+	// When a reaction is received, check if the structure is partial
+	if (reaction.partial) {
+		// If the message this reaction belongs to was removed, the fetching might result in an API error which should be handled
+		try {
+			await reaction.fetch();
+		} catch (error) {
+			console.error('Something went wrong when fetching the message:', error);
+			// Return as `reaction.message.author` may be undefined/null
+			return;
+		}
+	}
+	if (reaction.message.id == '990544112853843968') {
+		if (reaction.emoji.name == 'white_check_mark') {
+			const role = roles.id('990521995332558898')
+			const member = reaction.emoji.author
+			member.roles.add(role);
+		} else {
+			console.error('reaction role error!')
+			return
+		}
+	}
+});
 
 // ////////////////////////////////////////////////////////////////////
 // EVENTS
@@ -33,13 +65,12 @@ const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
 	const command = require(filePath);
-	client.commands.set(command.data.name, command);
+	client.commands.set(command.name, command);
 }
 
 // ////////////////////////////////////////////////////////////////////
 // CLIENT
 // ////////////////////////////////////////////////////////////////////
-
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isCommand()) return;
 
@@ -51,9 +82,11 @@ client.on('interactionCreate', async interaction => {
 		await command.execute(interaction);
 	} catch (error) {
 		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		await interaction.reply({
+			embeds: [Embeds.error('Error', 'There was an error while executing this command!')]
+		})
 	}
 });
 
-client.login(token);
+client.login(secrets.token);
 

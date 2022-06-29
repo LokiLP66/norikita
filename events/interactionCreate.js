@@ -26,9 +26,9 @@ module.exports = {
 		// Defining new data to be added
 		let newData = {
 			User:interaction.user.tag, 
-			Channel:"#" + interaction.channel.name, 
+			Channel:interaction.channel.id, 
 			Date:date,
-			ID:dataID
+			ID:interaction.id
 		};
 		
 		// Adding the new data to our object
