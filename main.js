@@ -13,29 +13,7 @@ const client = new Client({
 // ReactionRole
 // ////////////////////////////////////////////////////////////////////
 
-client.on('messageReactionAdd', async (reaction, user) => {
-	// When a reaction is received, check if the structure is partial
-	if (reaction.partial) {
-		// If the message this reaction belongs to was removed, the fetching might result in an API error which should be handled
-		try {
-			await reaction.fetch();
-		} catch (error) {
-			console.error('Something went wrong when fetching the message:', error);
-			// Return as `reaction.message.author` may be undefined/null
-			return;
-		}
-	}
-	if (reaction.message.id == '990544112853843968') {
-		if (reaction.emoji.name == 'white_check_mark') {
-			const role = roles.id('990521995332558898')
-			const member = reaction.emoji.author
-			member.roles.add(role);
-		} else {
-			console.error('reaction role error!')
-			return
-		}
-	}
-});
+
 
 // ////////////////////////////////////////////////////////////////////
 // EVENTS
@@ -83,7 +61,8 @@ client.on('interactionCreate', async interaction => {
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({
-			embeds: [Embeds.error('Error', 'There was an error while executing this command!')]
+			embeds: [Embeds.error('Error', 'There was an error while executing this command!')], 
+			ephemeral: true 
 		})
 	}
 });

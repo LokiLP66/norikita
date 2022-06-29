@@ -7,6 +7,6 @@ module.exports = {
 
 		console.log(`Ready! Logged in as ${client.user.tag}`);
 		client.user.setActivity(activities);
-		client.user.setStatus('invisible');
+		client.user.setStatus('dnd');
 	},
 };
