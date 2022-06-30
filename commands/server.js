@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription('Display info about this server.'),
 	async execute(interaction) {
 		interaction.reply({
-			embeds: [Embeds.info('Server Info', `Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`)]
+			embeds: [Embeds.info('Server Info', `Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`)],
 		});
-	}
+	},
 };

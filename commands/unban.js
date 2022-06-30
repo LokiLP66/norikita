@@ -3,18 +3,16 @@ const { PermissionFlagsBits } = require('discord-api-types/v10');
 const Embeds = require('../messages/Embeds');
 
 module.exports = {
-	name: 'ban',
+	name: 'unban',
 	data: new SlashCommandBuilder()
-		.setName('ban')
-		.setDescription('Bans a user')
+		.setName('unban')
+		.setDescription('Unbans a user')
 		.setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
-		.addUserOption(option => option.setName('target').setDescription('Select a user')),
+		.addUserOption(option => option.setName('input').setDescription('Select a userId')),
 	async execute(interaction) {
-		const user = interaction.options.getUser('target');
+		const user = interaction.options.get('input')?.value;
 		const guild = interaction.guild;
-		guild.members.ban(user);
-		await interaction.reply({
-			embeds: [Embeds.mod('Banned User', `Banned: ${user} from Guild: ${guild}`)],
-		});
+		guild.members.unban(user);
+		await interaction.reply({ embeds: [Embeds.mod('Unbanned User', `Unbanned: ${user}`)] });
 	},
 };
