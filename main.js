@@ -3,12 +3,21 @@ const path = require('node:path');
 const { Client, Collection, Intents } = require('discord.js');
 const { secrets } = require('./data/config.json');
 const Embeds = require('./messages/embeds');
+const { generateDependencyReport } = require('@discordjs/voice');
+const { Player } = require('discord-player');
 
 const client = new Client({
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_VOICE_STATES],
 	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
+	disableMentions: 'everyone',
 });
 
+client.config = require('./config');
+
+global.player = new Player(client, client.config.opt.discordPlayer);
+
+require('./src/loader');
+require('./src/events');
 
 // ////////////////////////////////////////////////////////////////////
 // Audit Log
@@ -44,6 +53,16 @@ for (const file of eventFiles) {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
+
+// ////////////////////////////////////////////////////////////////////
+// Music Bot
+// ////////////////////////////////////////////////////////////////////
+
+client.on('ready', async () => {
+
+	console.log(generateDependencyReport());
+
+});
 
 // ////////////////////////////////////////////////////////////////////
 // COMMANDS
