@@ -1,28 +1,38 @@
-const { readdirSync } = require('fs');
+/* eslint-disable no-undef */
 const { Collection } = require('discord.js');
-
-client.commands = new Collection();
-
-const events = readdirSync('./events/').filter(file => file.endsWith('.js'));
-
+const fs = require('node:fs');
+const path = require('node:path');
+// ////////////////////////////////////////////////////////////////////
+// EVENTS
+// ////////////////////////////////////////////////////////////////////
 console.log('Loading events...');
 
-for (const file of events) {
-	const event = require(`../events/${file}`);
-	console.log(`-> Loaded event ${file.split('.')[0]}`);
-	client.on(file.split('.')[0], event.bind(null, client));
-	delete require.cache[require.resolve(`../events/${file}`)];
+const eventsPath = path.join(__dirname, '../events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	}
+	else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
 }
+
+// ////////////////////////////////////////////////////////////////////
+// COMMANDS
+// ////////////////////////////////////////////////////////////////////
 
 console.log('Loading commands...');
 
-readdirSync('./commands/').forEach(dirs => {
-	const commands = readdirSync(`./commands/${dirs}`).filter(files => files.endsWith('.js'));
+client.commands = new Collection();
+const commandsPath = path.join(__dirname, '../commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
-	for (const file of commands) {
-		const command = require(`../commands/${dirs}/${file}`);
-		console.log(`-> Loaded command ${command.name.toLowerCase()}`);
-		client.commands.set(command.name.toLowerCase(), command);
-		delete require.cache[require.resolve(`../commands/${dirs}/${file}`)];
-	}
-});
+for (const file of commandFiles) {
+	const filePath = path.join(commandsPath, file);
+	const command = require(filePath);
+	client.commands.set(command.name, command);
+}

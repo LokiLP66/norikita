@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { codeBlock } = require('@discordjs/builders');
-const Embeds = require('../messages/Embeds');
+const Embeds = require('./../messages/embeds');
 
 module.exports = {
 	name: 'logs',

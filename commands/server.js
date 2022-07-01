@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const Embeds = require('../messages/embeds');
+const Embeds = require('./../messages/embeds');
 
 module.exports = {
 	name: 'server',

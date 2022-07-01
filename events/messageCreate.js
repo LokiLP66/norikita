@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 module.exports = (client, message) => {
 	if (message.author.bot || message.channel.type === 'dm') return;
 

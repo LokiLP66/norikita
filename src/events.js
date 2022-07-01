@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 player.on('error', (queue, error) => {
 	console.log(`Error emitted from the queue ${error.message}`);
 });

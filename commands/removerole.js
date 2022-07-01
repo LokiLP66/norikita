@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { PermissionFlagsBits } = require('discord-api-types/v10');
-const Embeds = require('../messages/embeds');
+const Embeds = require('./../messages/embeds');
 
 module.exports = {
 	name: 'removerole',
