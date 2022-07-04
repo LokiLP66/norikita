@@ -1,12 +1,10 @@
-import * as fs from 'node:fs'
 import { REST } from '@discordjs/rest'
 import { Routes } from 'discord-api-types/v10'
 import { IDs, secrets } from './data/config.json'
 import * as commandModules from './commands/commandIndex'
-import { SlashCommandBuilder } from '@discordjs/builders'
 
 type Command = {
-	data: SlashCommandBuilder
+	data: unknown
 }
 
 const commands = []
