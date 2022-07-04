@@ -1,8 +1,9 @@
 import { MessageEmbed } from 'discord.js'
-import { colours } from '../data/config.json'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { colours } = require('../data/config.json')
 
 module.exports = {
-	info(title, cont, img, url, thumb) {
+	info(title: string, cont: string, url: string, thumb: string, img: string) {
 		const emb = new MessageEmbed()
 			.setColor(colours.blue)
 			.setDescription(cont)
@@ -21,7 +22,7 @@ module.exports = {
 		}
 		return emb
 	},
-	error(title, cont, url, thumb, img) {
+	error(title: string, cont: string, url: string, thumb: string, img: string) {
 		const emb = new MessageEmbed()
 			.setColor(colours.red)
 			.setDescription(cont)
@@ -40,7 +41,7 @@ module.exports = {
 		}
 		return emb
 	},
-	succes(title, cont, url, thumb, img) {
+	succes(title: string, cont: string, url: string, thumb: string, img: string) {
 		const emb = new MessageEmbed()
 			.setColor(colours.green)
 			.setDescription(cont)
@@ -59,7 +60,7 @@ module.exports = {
 		}
 		return emb
 	},
-	mod(title, cont, url, thumb, img) {
+	mod(title: string, cont: string, url: string, thumb: string, img: string) {
 		const emb = new MessageEmbed()
 			.setColor(colours.orange)
 			.setDescription(cont)
@@ -78,7 +79,7 @@ module.exports = {
 		}
 		return emb
 	},
-	log(title, cont, url, thumb, img) {
+	log(title: string, cont: string, url: string, thumb: string, img: string) {
 		const emb = new MessageEmbed()
 			.setColor(colours.yellow)
 			.setDescription(cont)
