@@ -23,7 +23,7 @@ client.on('ready', async () => {
 		`On ${servers} servers`,
 		`helps ${servercount} users`,
 		'by LokiLP66#6622',
-		'version 2.0.0',
+		'version 3.0.0 - Beta 1',
 	]
 
 	setInterval(() => {
