@@ -12,7 +12,7 @@ module.exports = {
 		.setDescription('Display info about this server.'),
 	async execute(interaction: CommandInteraction) {
 		interaction.reply({
-			embeds: [info('Server Info', `Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`)],
+			embeds: [info('Server Info', `Server name: ${interaction.guild?.name}\nTotal members: ${interaction.guild?.memberCount}`)],
 		})
 	},
 }
