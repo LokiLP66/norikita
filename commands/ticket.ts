@@ -1,6 +1,7 @@
 import { Client, CommandInteraction, TextChannel } from 'discord.js'
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { info } from './../messages/embeds'
+import { createTicket } from '../firebase'
 
 export const data = new SlashCommandBuilder()
 	.setName('ticket')
@@ -27,7 +28,7 @@ export async function execute(interaction: CommandInteraction, client: Client) {
 	const { user } = interaction
 	thread.send(`**User:** ${user}\n**Problem:** ${problemDescription}`)
 
-	//TODO: create the ticket and store it in the firestore
+	await createTicket(thread.id, problemDescription)
 
 	return interaction.reply({
 		embeds: [info('Help is on the way', '', '', '', '')],
