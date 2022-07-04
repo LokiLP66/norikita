@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { PermissionFlagsBits } from 'discord-api-types/v10'
+import { CommandInteraction } from 'discord.js'
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const { mod } = require('../messages/embeds')
@@ -12,7 +13,7 @@ module.exports = {
 		.setDefaultMemberPermissions(PermissionFlagsBits.ManageRoles)
 		.addUserOption(option => option.setName('target').setDescription('Select a user'))
 		.addRoleOption(option => option.setName('role').setDescription('Select a role')),
-	async execute(interaction) {
+	async execute(interaction: CommandInteraction) {
 		const role = interaction.options.getRole('role')
 		const user = interaction.options.getMember('target')
 		user.roles.remove(role)

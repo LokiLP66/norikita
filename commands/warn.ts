@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { PermissionFlagsBits } from 'discord-api-types/v10'
+import { CommandInteraction } from 'discord.js'
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const { mod } = require('../messages/embeds')
@@ -11,7 +12,7 @@ module.exports = {
 		.setDescription('Warns a member')
 		.setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers)
 		.addUserOption(option => option.setName('target').setDescription('Select a member')),
-	async execute(interaction) {
+	async execute(interaction: CommandInteraction) {
 		const member = interaction.options.getMember('target')
 		if (!member.roles.cache.some(role => role.name === '❌') && !member.roles.cache.some(role => role.name === '❌❌') && !member.roles.cache.some(role => role.name === '❌❌❌')) {
 			member.roles.add('991770397584392202')

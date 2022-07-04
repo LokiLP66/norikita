@@ -3,6 +3,8 @@
 import { Collection } from 'discord.js'
 import fs from 'node:fs'
 import path from 'node:path'
+import client = require('../main')
+
 // ////////////////////////////////////////////////////////////////////
 // EVENTS
 // ////////////////////////////////////////////////////////////////////
@@ -30,7 +32,7 @@ console.log('Loading commands...')
 
 client.commands = new Collection()
 const commandsPath = path.join(__dirname, '../commands')
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'))
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.ts'))
 
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file)

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const { error } = require('../messages/embeds')
+import client = require('../main')
 // ////////////////////////////////////////////////////////////////////
 // Interaction Error
 // ////////////////////////////////////////////////////////////////////

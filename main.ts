@@ -6,6 +6,8 @@ const client = new Client({
 	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
 })
 
+export = client
+
 // events/command loader
 require('./src/loader')
 
