@@ -6,13 +6,13 @@
   "author": "LokiLP66",
   "license": "MIT",
   "scripts": {
-    "deploy": "ts-node deploy-commands.ts",
-    "test": "ts-node . debug",
-    "start": "ts-node .",
+    "deploy": "node deploy-commands.ts",
+    "test": "node . debug",
+    "start": "node .",
     "lint": "eslint .",
     "pm2": "pm2 main.js",
     "pm2-stop": "pm2 stop main.ts",
-    "test-cmd": "ts-node ./commands/commandIndex.ts"
+    "test-cmd": "node ./commands/commandIndex.ts"
   },
   "dependencies": {
     "@discordjs/builders": "^0.15.0",
