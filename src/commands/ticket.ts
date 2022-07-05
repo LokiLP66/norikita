@@ -1,6 +1,6 @@
 import { Client, CommandInteraction, TextChannel } from 'discord.js'
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { info } from './../messages/embeds'
+import { info } from '../messages/embeds'
 import { createTicket } from '../firebase'
 
 export const data = new SlashCommandBuilder()

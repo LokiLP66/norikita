@@ -1,6 +1,6 @@
 import { CommandInteraction } from 'discord.js'
 import { SlashCommandBuilder } from '@discordjs/builders'
-import { info } from './../messages/embeds'
+import { info } from '../messages/embeds'
 
 export const data = new SlashCommandBuilder()
 	.setName('ping')

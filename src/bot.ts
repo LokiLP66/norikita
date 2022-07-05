@@ -1,5 +1,5 @@
 import { Client, Intents } from 'discord.js'
-import { secrets } from './data/config.json'
+import config from './config'
 import * as commandModules from './commands/commandIndex'
 
 export const client = new Client({
@@ -48,5 +48,5 @@ client.on('interactionCreate', async interaction => {
 
 exports = client, commands
 
-client.login(secrets.token)
+client.login(config.DISCORD_TOKEN)
 
