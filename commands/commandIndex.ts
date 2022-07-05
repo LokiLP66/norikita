@@ -9,7 +9,7 @@ const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('
 commandFiles.shift()
 const cmdFiles = commandFiles
 const len = cmdFiles.length
-
+console.log(len)
 /* for (let i = 1; i < commandFiles.length; i++) {
 	const text = commandFiles[i].indexOf('.ts')
 	const cmd = commandFiles[i].slice(0, text)
