@@ -8,10 +8,10 @@
   "scripts": {
     "deploy": "node deploy-commands.ts",
     "test": "ts-node . debug",
-    "start": "node .",
+    "build": "tsc",
+    "dev": "concurrently \"tsc -w\" \"nodemon build",
+    "start": "node build/main.ts",
     "lint": "eslint .",
-    "pm2": "pm2 main.js",
-    "pm2-stop": "pm2 stop main.ts",
     "test-cmd": "ts-node ./commands/commandIndex.ts"
   },
   "dependencies": {
