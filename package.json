@@ -11,7 +11,8 @@
     "start": "ts-node .",
     "lint": "eslint .",
     "pm2": "pm2 main.js",
-    "pm2-stop": "pm2 stop main.ts"
+    "pm2-stop": "pm2 stop main.ts",
+    "test-cmd": "ts-node ./commands/commandIndex.ts"
   },
   "dependencies": {
     "@discordjs/builders": "^0.15.0",
@@ -25,6 +26,7 @@
     "discordjs-reaction-role": "^3.0.0",
     "dotenv": "^16.0.1",
     "eslint": "^8.19.0",
+    "express": "^4.18.1",
     "ffmpeg": "^0.0.4",
     "ffmpeg-static": "^5.0.2",
     "firebase": "^9.8.4",
@@ -38,6 +40,7 @@
     "tweetnacl": "^1.0.3"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@typescript-eslint/eslint-plugin": "^5.30.4",
     "@typescript-eslint/parser": "^5.30.4",
     "ts-node": "^10.8.2",

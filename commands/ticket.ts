@@ -24,6 +24,7 @@ export async function execute(interaction: CommandInteraction, client: Client) {
 		name: `support-${Date.now()}`,
 		reason: `Support ticket ${Date.now()}`
 	})
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const problemDescription = interaction.options.getString('description')!
 	const { user } = interaction
 	thread.send(`**User:** ${user}\n**Problem:** ${problemDescription}`)
