@@ -7,12 +7,12 @@
   "license": "MIT",
   "scripts": {
     "deploy": "node deploy-commands.ts",
-    "test": "node . debug",
+    "test": "ts-node . debug",
     "start": "node .",
     "lint": "eslint .",
     "pm2": "pm2 main.js",
     "pm2-stop": "pm2 stop main.ts",
-    "test-cmd": "node ./commands/commandIndex.ts"
+    "test-cmd": "ts-node ./commands/commandIndex.ts"
   },
   "dependencies": {
     "@discordjs/builders": "^0.15.0",
