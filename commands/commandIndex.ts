@@ -1,15 +1,16 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 export * as ping from './ping'
 export * as ticket from './ticket'
 import { name, description } from './help'
 import fs from 'fs'
 import path from 'path'
 
-let file = ''
-console.log(fs.readdir(__dirname, '../commands/${file}'))
+const commandsPath = path.join(__dirname, '../commands')
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.ts'))
 
-const Commands = {
-	name: name,
-	description: description
-}
-
-console.log(Commands)
+for (let i = 1; i < commandFiles.length; i++) {
+    const text = commandFiles[i].indexOf('.ts')
+    const len = commandFiles[i].length
+    const cmd = len - te
+    console.log(len)
+  }
