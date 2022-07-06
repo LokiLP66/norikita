@@ -104,38 +104,38 @@ client.on('interactionCreate', async interaction => {
 // ////////////////////////////////////////////////////////////////////
 // Rainbow Role
 // ////////////////////////////////////////////////////////////////////
-/*
+
 client.on('ready', async () => {
 	const guild = await client.guilds.cache.get('990521467215171594')
 
 	type ColorsResolvable = [
-		'DarkRed',
-		'Red',
-		'DarkOrange',
-		'Orange',
-		'DarkGold',
-		'Yellow',
-		'DarkGreen',
-		'Green',
-		'DarkBlue',
-		'Blue',
-		'DarkPurple',
-		'Purple',
+		'#D32F2F',
+		'#F44336',
+		'#E64A19',
+		'#FF5722',
+		'#F9A825',
+		'#FFEB3B',
+		'#558B2F',
+		'#2E7D32',
+		'#283593',
+		'#3F51B5',
+		'#6A1B9A',
+		'#673AB7'
 	]
 
 	const colours: ColorsResolvable = [
-		'DarkRed',
-		'Red',
-		'DarkOrange',
-		'Orange',
-		'DarkGold',
-		'Yellow',
-		'DarkGreen',
-		'Green',
-		'DarkBlue',
-		'Blue',
-		'DarkPurple',
-		'Purple',
+		'#D32F2F',
+		'#F44336',
+		'#E64A19',
+		'#FF5722',
+		'#F9A825',
+		'#FFEB3B',
+		'#558B2F',
+		'#2E7D32',
+		'#283593',
+		'#3F51B5',
+		'#6A1B9A',
+		'#673AB7'
 	]
 
 	setInterval(() => {
@@ -146,6 +146,5 @@ client.on('ready', async () => {
 	}, 1000)
 })
 
-*/
 
 client.login(secrets.token)
