@@ -7,6 +7,6 @@ export const data = new SlashCommandBuilder()
 	.setDescription('Replies with Pong!')
 
 export async function execute(interaction: CommandInteraction) {
-	await interaction.reply({embeds: [info('Ping!', '', '', '', '')]})
+	await interaction.reply({embeds: [info('Pong!', '', '', '', '')]})
 }
 

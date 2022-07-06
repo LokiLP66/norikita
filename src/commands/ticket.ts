@@ -1,7 +1,6 @@
 import { Client, CommandInteraction, TextChannel } from 'discord.js'
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { info } from '../messages/embeds'
-import { createTicket } from '../firebase'
 
 export const data = new SlashCommandBuilder()
 	.setName('ticket')
@@ -27,12 +26,5 @@ export async function execute(interaction: CommandInteraction, client: Client) {
 	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 	const problemDescription = interaction.options.getString('description')!
 	const { user } = interaction
-	thread.send(`**User:** ${user}\n**Problem:** ${problemDescription}`)
-
-	await createTicket(thread.id, problemDescription)
-
-	return interaction.reply({
-		embeds: [info('Help is on the way', '', '', '', '')],
-		ephemeral: true
-	})
+	thread.send({ embeds: [info(`**User:** ${user}\n**Problem:** ${problemDescription}`, '', '', '', '')] })
 }

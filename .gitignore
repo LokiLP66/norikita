@@ -1,7 +1,1 @@
 node_modules
-config.json
-.env
-yarn.lock
-yarn-error.log
-package-lock.json
-build

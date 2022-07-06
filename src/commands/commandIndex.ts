@@ -2,16 +2,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 export * as ping from './ping'
 export * as ticket from './ticket'
-import fs from 'fs'
-import path from 'path'
-import { info } from '../messages/embeds'
+export * as help from './help'
 
-const commandsPath = path.join(__dirname, '../commands')
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.ts'))
-
-function loopArray(commandFiles: string[]) {
-	const i = 1
-}
-
-
-// help outputs 
