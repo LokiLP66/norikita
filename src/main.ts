@@ -141,10 +141,13 @@ client.on('ready', async () => {
 	setInterval(() => {
 		const r_colours = colours[Math.floor(Math.random() * colours.length)]
 		guild?.roles.edit('994239184342630461', { color: r_colours})
-			.then(updated => console.log(`Edited role name to ${updated.color}`))
+			.then()
 			.catch(console.error)
-	}, 1000)
+	}, 3000)
 })
 
+// ////////////////////////////////////////////////////////////////////
+// LOGIN
+// ////////////////////////////////////////////////////////////////////
 
 client.login(secrets.token)
