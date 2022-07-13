@@ -4,8 +4,26 @@
 --}}
 <iframe style="display: none" name="dummyframe" id="dummyframe"></iframe>
 
-<div>
-    <h1>Bot: {{botName}}</h1>
-    <h2>is on {{botGuildsLength}}</h2>
-    <h2>helps {{guildsMembersLength}}</h2>
+
+
+<div class="viewBox infoBox">
+    <div class="mainBox infoBox">
+        <h1>Bot: {{botName}}</h1>
+        <h2>is on {{botGuildsLength}} servers</h2>
+        <h2>helps {{guildsMembersLength}} users</h2>
+        
+    </div>
+    <div class="commandBox infoBox">
+        <form action="/say" method="POST" target="dummyframe">
+            <h3>Say Command:</h3>
+            <input type="text" name="channelId" placeholder="CHANNELID">
+            <input type="text" name="text" placeholder="TEXT">
+            <input type="submit" class="button" value="SEND">
+        </form>
+        <form action="/ping" method="POST" target="dummyframe">
+            <h3>Ping Command:</h3>
+            <input type="text" name="channelId" placeholder="CHANNELID">
+            <input type="submit" class="button" value="SEND">
+        </form>
+    </div>
 </div>

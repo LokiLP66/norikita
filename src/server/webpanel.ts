@@ -7,7 +7,7 @@ const express = require('express')
 const hbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const path = require('path')
-const { ids } = require('./../data/config.json')
+import * as Embeds from './../messages/embeds'
 
 class WebPanel {
 	token: any
@@ -46,28 +46,36 @@ class WebPanel {
 	registerRoots() {
 		this.app.get('/', (req: any, res: any) => {
 			const _token = req.query.token
-
+			/*
 			if (!this.checkToken(_token)) {
 				res.render('error', { title: 'ERROR' })
 				return
 			}
-
-			/*
-			const chans: { id: any; name: any }[] = []
-			this.client.channels.cache
-				.filter((c: { type: string }) => c.type == 'text')
-				.forEach((c: { id: any; name: any }) => {
-					chans.push({id: c.id, name: c.name})
-				})
 			*/
+			const guilds: { id: any; name: any }[] = []
+			this.client.guilds.cache.forEach((guild: { id: any; name: any }) => {
+				guilds.push({ id: guild.id, name: guild.name })
+			});
 
 			res.render('index', { 
 				title: 'Webpanel', 
-				botName: this.client.tag, 
+				botName: this.client.user?.tag, 
 				botGuildsLength: this.client.guilds.cache.size,
-				guildsMembersLength: this.client.guilds.cache.reduce((a: any, b: any) => a + b.memberCount, 0)
+				guildsMembersLength: this.client.guilds.cache.reduce((a: any, b: any) => a + b.memberCount, 0),
+				guilds: guilds,
 			})
 		})
+		this.app.post('/say', (req: any, res: any) => {
+			const chanId = req.body.channelId
+			const chan = this.client.channels.cache.get(chanId)
+			const text = req.body.text
+			chan.send({ embeds: [Embeds.info(text, 'Say', '', '', '')] })
+		});
+		this.app.post('/ping', (req: any, res: any) => {
+			const chanId = req.body.channelId
+			const chan = this.client.channels.cache.get(chanId)
+			chan.send({ embeds: [Embeds.info(`${this.client.ws.ping}ms`, 'Ping', '', '', '')] })
+		});
 	}
 }
 

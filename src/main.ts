@@ -19,8 +19,13 @@ const client = new Client({
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const wp = new Webpanel(secrets.webtoken, ids.port, client)
 
+const channels = client.channels.cache.map(c => c.type)
+const channelsId = client.channels.cache.map(c => c.id)
+console.log(channels)
+console.log(channelsId)
+
 client.on('ready', async () => {
-	console.log(`Logged to the client ${client.user?.username}\n-> Ready on ${client.guilds.cache.size} servers for a total of ${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)} users`)
+	console.log(`Logged to the client ${client.user?.tag}\n-> Ready on ${client.guilds.cache.size} servers for a total of ${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)} users`)
 	client.user?.setStatus('dnd')
 })
 
