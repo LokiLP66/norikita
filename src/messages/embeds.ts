@@ -23,6 +23,27 @@ export function info(cont: string, title: string, url: string, thumb: string, im
 	return emb
 }
 
+export function nsfw(cont: string, title: string, url: string, thumb: string, img: string) {
+	const emb = new MessageEmbed()
+		.setColor('#C0392B')
+		.setDescription(cont)
+		.setTimestamp()
+		.setFooter('by LokiLP66#6622', 'https://cdn.discordapp.com/avatars/655423421110550558/390a773e7558738d43be2f6555d46402.png')
+	if (title) {
+		emb.setTitle(title)
+	}
+	if (url) {
+		emb.setURL(url)
+	}
+	if (thumb) {
+		emb.setThumbnail(thumb)
+	}
+	if (img) {
+		emb.setImage(img)
+	}
+	return emb
+}
+
 export function error(cont: string, title: string, url: string, thumb: string, img: string) {
 	const emb = new MessageEmbed()
 		.setColor(colours.red)

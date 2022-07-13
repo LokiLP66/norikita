@@ -9,9 +9,12 @@
     "ids": {
         "client": "829257090673279006",
         "guild": "990521467215171594",
-        "dev": "655423421110550558"
+        "dev": "655423421110550558",
+        "nsfwChannelId": "995649636394086421",
+        "port": "80"
     },
     "secrets": {
-        "token": "ODI5MjU3MDkwNjczMjc5MDA2.GZIWXi.5bY0_Yi3vf9F24YV8FKv59XfIPR20nj_1Dm_OQ"
+        "token": "ODI5MjU3MDkwNjczMjc5MDA2.GZIWXi.5bY0_Yi3vf9F24YV8FKv59XfIPR20nj_1Dm_OQ",
+        "webtoken": "837494883403804672"
     }
 }

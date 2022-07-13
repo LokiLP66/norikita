@@ -16,6 +16,6 @@ for (const module of Object.values<Command>(commandModules)) {
 
 const rest = new REST({ version: '10' }).setToken(secrets.token)
 
-rest.put(Routes.applicationGuildCommands(ids.client, ids.guild), { body: commands })
+rest.put(Routes.applicationCommands(ids.client), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
 	.catch(console.error)

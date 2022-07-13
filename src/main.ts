@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-empty */
 import { Client, Intents } from 'discord.js'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { secrets, ids } = require('./data/config.json')
 import * as commandModules from './commands/commandIndex'
-import { info, succes, error } from './messages/embeds'
+import { succes, error } from './messages/embeds'
+import Webpanel from './server/webpanel'
 
 // ////////////////////////////////////////////////////////////////////
 // CONNECT
@@ -15,8 +16,11 @@ const client = new Client({
 	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
 })
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const wp = new Webpanel(secrets.webtoken, ids.port, client)
+
 client.on('ready', async () => {
-	console.log(`Logged to the client ${client.user?.username}\n-> Ready on ${client.guilds.cache.size} servers for a total of ${client.users.cache.size} users`)
+	console.log(`Logged to the client ${client.user?.username}\n-> Ready on ${client.guilds.cache.size} servers for a total of ${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)} users`)
 	client.user?.setStatus('dnd')
 })
 
