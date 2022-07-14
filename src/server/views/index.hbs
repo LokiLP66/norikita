@@ -16,13 +16,21 @@
     <div class="commandBox infoBox">
         <form action="/say" method="POST" target="dummyframe">
             <h3>Say Command:</h3>
-            <input type="text" name="channelId" placeholder="CHANNELID">
+            <select name="channelid">
+                {{#each chans}}
+                    <option value="{{this.id}}">{{this.name}}</option>
+                {{/each}}
+            </select>
             <input type="text" name="text" placeholder="TEXT">
             <input type="submit" class="button" value="SEND">
         </form>
         <form action="/ping" method="POST" target="dummyframe">
             <h3>Ping Command:</h3>
-            <input type="text" name="channelId" placeholder="CHANNELID">
+            <select name="channelid">
+                {{#each chans}}
+                    <option value="{{this.id}}">{{this.name}}</option>
+                {{/each}}
+            </select>
             <input type="submit" class="button" value="SEND">
         </form>
     </div>

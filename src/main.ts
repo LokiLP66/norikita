@@ -6,6 +6,8 @@ const { secrets, ids } = require('./data/config.json')
 import * as commandModules from './commands/commandIndex'
 import { succes, error } from './messages/embeds'
 import Webpanel from './server/webpanel'
+const { createAudioResource, createAudioPlayer } = require('@discordjs/voice');
+
 
 // ////////////////////////////////////////////////////////////////////
 // CONNECT
@@ -15,6 +17,8 @@ const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_VOICE_STATES],
 	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
 })
+
+export const player = createAudioPlayer();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const wp = new Webpanel(secrets.webtoken, ids.port, client)
@@ -65,32 +69,6 @@ client.on('interactionCreate', async interaction => {
 })
 
 // ////////////////////////////////////////////////////////////////////
-// AUTOROLE
-// ////////////////////////////////////////////////////////////////////
-
-const autoRoleID = '990521995332558898'
-const devAutoRoleID = '991760407716974612'
-
-client.on('guildMemberAdd', async (member) => {
-
-	const role = await member.guild.roles.cache.find(r => r.id === autoRoleID)
-	const devRole = await member.guild.roles.cache.find(r => r.id === devAutoRoleID)
-
-	if (role) {
-		member.roles.add(role)
-		member.send({ embeds: [succes(`You got automatically assigned the role ${role.name}!`, '', '', '', '')] })
-	}
-
-	if (devRole) {
-		if (member.id == ids.dev) {
-			member.roles.add(devRole)
-			member.setNickname('ロキ')
-			member.send({ embeds: [succes(`You got automatically assigned the role ${devRole.name}!`, '', '', '', '')] })
-		}
-	}
-})
-
-// ////////////////////////////////////////////////////////////////////
 // InteractionError
 // ////////////////////////////////////////////////////////////////////
 
@@ -107,7 +85,7 @@ client.on('interactionCreate', async interaction => {
 	if (!errorMessage) {
 		return
 	}
-	interaction.reply({ embeds: [error(errorMessage, '', '', '', '')] })
+	interaction.reply({ embeds: [error(errorMessage, 'Error', '', '', '')] })
 })
 
 // ////////////////////////////////////////////////////////////////////
@@ -154,6 +132,45 @@ client.on('ready', async () => {
 			.catch(console.error)
 	}, 3000)
 })
+
+// ////////////////////////////////////////////////////////////////////
+// Temp channel
+// ////////////////////////////////////////////////////////////////////
+
+client.on('voiceStateUpdate', async (oldState, newState) => {
+	const guild = client.guilds.cache.get('990521467215171594')
+	const channelID = '997141182167662693'
+	const category = '997151753713766510'
+	if(newState.channelId === channelID) {	
+		const member: any = newState.member
+		const tempChannel = await guild?.channels.create(`${member?.displayName}'s channel`, {
+			type: 'GUILD_VOICE',
+			parent: category,
+		})
+		const tempChannelId = tempChannel?.id
+
+		member?.voice.setChannel(tempChannelId)
+			.then(() => console.log(`Moved ${member.displayName} to ${tempChannel?.name}`))
+			.catch(console.error)
+	}
+	else if(oldState.channelId) {
+		const voiceChannel = guild?.channels.cache.get(oldState.channelId)
+		const member: any = oldState.member
+		if (voiceChannel?.parentId == category) {
+			if (voiceChannel?.name == `${member.displayName}'s channel`) {
+				voiceChannel?.delete()
+					.then(() => console.log(`Deleted ${voiceChannel?.name}`))
+					.catch(console.error)
+			}
+			else {
+				return
+			}
+		}
+		else {
+			return
+		}
+	}
+});
 
 // ////////////////////////////////////////////////////////////////////
 // LOGIN
