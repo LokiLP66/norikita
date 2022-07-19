@@ -1,12 +1,14 @@
-import { CommandInteraction } from 'discord.js'
-import { SlashCommandBuilder } from '@discordjs/builders'
 import { info } from '../messages/embeds'
+import { ICommand } from 'wokcommands'
 
-export const data = new SlashCommandBuilder()
-	.setName('ping')
-	.setDescription('Replies with Pong!')
+export default {
+	category: 'Test',
+	description: 'Replies with the bot ping.',
 
-export async function execute(interaction: CommandInteraction) {
-	await interaction.reply({embeds: [info('Pong!', '', '', '', '')]})
-}
+	slash: 'both',
+	testOnly: false,
 
+	callback: async ({ channel }) => {
+		await channel.send({embeds: [info('Pong!', '', '', '', '')]})
+	}
+} as ICommand

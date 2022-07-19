@@ -1,24 +1,43 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-import { CommandInteraction } from 'discord.js'
-import { SlashCommandBuilder } from '@discordjs/builders'
-import { info } from '../messages/embeds'
+import { error, info } from '../messages/embeds'
+import { ICommand } from 'wokcommands'
+import DJS, { GuildMember } from 'discord.js'
 
-export const data = new SlashCommandBuilder()
-	.setName('kick')
-	.setDescription('Kick a specific user.')
-	.addUserOption(option => option.setName('target').setDescription('Select a user').setRequired(true))
+export default {
+	category: 'Moderation',
+	description: 'Kicks a specific user.',
 
-export async function execute(interaction: CommandInteraction) {
-	const target = interaction.options.getUser('target')
-	if (!target) {
-		await interaction.reply({embeds: [info('Error', 'No target specified!', '', '', '')]})
-		return
+	minArgs: 2,
+	expectedArgs: '<user> <reason>',
+	expectedArgsTypes: ['USER', 'STRING'],
+
+	slash: 'both',
+	testOnly: false,
+
+	permissions: ['KICK_MEMBERS'],
+
+	callback: async ({ interaction, channel, message, args }) => {
+		const target = message ? message.mentions.members?.first() : interaction.options.getMember('user') as GuildMember
+		if (!target) {
+			await channel.send({embeds: [error('Please tag someone to kick.', 'Error', '', '', '')]})
+			return
+		}
+
+		if (!target.kickable) {
+			await channel.send({embeds: [error('Cannot kick that user.', 'Error', '', '', '')]})
+			return
+		}
+		
+		args.shift()
+		const reason = args.join(' ')
+
+		target.kick(reason)
+
+		return {
+			custom: true,
+			embeds: [
+				info(`${target.user.tag} has been kicked.`, 'Kicked', '', '', ''),
+			],
+			ephemeral: true,
+		}
 	}
-	const member = interaction.guild?.members.cache.get(target.id)
- 	if (!member) {
- 		await interaction.reply({embeds: [info('Error', 'Target not found!', '', '', '')]})
- 		return
- 	}
-	await member.kick()
-	await interaction.reply({embeds: [info('Success', 'User kicked!', '', '', '')]})
-}
+} as ICommand

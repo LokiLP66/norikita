@@ -10,7 +10,7 @@ const path = require('path')
 const fs = require('fs')
 import * as Embeds from './../messages/embeds'
 import { player } from './../main'
-const { createAudioResource, joinVoiceChannel } = require('@discordjs/voice');
+const { createAudioResource, joinVoiceChannel } = require('@discordjs/voice')
 
 
 class WebPanel {
@@ -58,11 +58,11 @@ class WebPanel {
 			
 			const guild = this.client.guilds.cache.get('990521467215171594')
 			const chans: { id: any; name: any }[] = []
-            guild.channels.cache
-                .filter((c: { type: string }) => c.type == 'text')
-                .forEach((c: { id: any; name: any }) => {
-                    chans.push({id: c.id, name: c.name})
-                })
+			guild.channels.cache
+				.filter((c: { type: string }) => c.type == 'text')
+				.forEach((c: { id: any; name: any }) => {
+					chans.push({id: c.id, name: c.name})
+				})
 
 			res.render('index', { 
 				title: 'Webpanel', 
@@ -91,8 +91,8 @@ class WebPanel {
 			}
 
 			player.on('error', (error: { message: any; resource: { metadata: { title: any } } }) => {
-				console.error('Error:', error.message, 'with track', error.resource.metadata.title);
-			});
+				console.error('Error:', error.message, 'with track', error.resource.metadata.title)
+			})
 
 			res.render('soundboard', { 
 				title: 'Soundboard', 
@@ -101,40 +101,40 @@ class WebPanel {
 		})
 
 		// sounds
-		this.app.post(`/ac`, (req: any, res: any) => {
+		this.app.post('/ac', (req: any, res: any) => {
 			const guild = this.client.guilds.cache.get('990521467215171594')
 			const connection = joinVoiceChannel({
 				channelId: '992080572358864987',
 				guildId: guild?.id,
 				adapterCreator: guild?.voiceAdapterCreator,
-			});
-			const resource = createAudioResource(path.join(__dirname, `../sounds/ac.mp3`));
-			connection.subscribe(player);
-			player.play(resource);
+			})
+			const resource = createAudioResource(path.join(__dirname, '../sounds/ac.mp3'))
+			connection.subscribe(player)
+			player.play(resource)
 		})
 
-		this.app.post(`/allahuakbar`, (req: any, res: any) => {
+		this.app.post('/allahuakbar', (req: any, res: any) => {
 			const guild = this.client.guilds.cache.get('990521467215171594')
 			const connection = joinVoiceChannel({
 				channelId: '992080572358864987',
 				guildId: guild?.id,
 				adapterCreator: guild?.voiceAdapterCreator,
-			});
-			const resource = createAudioResource(path.join(__dirname, `../sounds/allahuakbar.mp3`));
-			connection.subscribe(player);
-			player.play(resource);
+			})
+			const resource = createAudioResource(path.join(__dirname, '../sounds/allahuakbar.mp3'))
+			connection.subscribe(player)
+			player.play(resource)
 		})
 
-		this.app.post(`/lol`, (req: any, res: any) => {
+		this.app.post('/lol', (req: any, res: any) => {
 			const guild = this.client.guilds.cache.get('990521467215171594')
 			const connection = joinVoiceChannel({
 				channelId: '992080572358864987',
 				guildId: guild?.id,
 				adapterCreator: guild?.voiceAdapterCreator,
-			});
-			const resource = createAudioResource(path.join(__dirname, `../sounds/lol.mp3`));
-			connection.subscribe(player);
-			player.play(resource);
+			})
+			const resource = createAudioResource(path.join(__dirname, '../sounds/lol.mp3'))
+			connection.subscribe(player)
+			player.play(resource)
 		})
 		
 
@@ -146,40 +146,40 @@ class WebPanel {
 			const text = req.body.text
 
 			if(!_token || !channelid || !text)
-                return res.sendStatus(400);
+				return res.sendStatus(400)
     
-            if (!this.checkToken(_token))
-                return res.sendStatus(401)
+			if (!this.checkToken(_token))
+				return res.sendStatus(401)
 
 			const chan = guild?.channels.cache.get(channelid)
 
 			if (chan) {
-                chan.send({ embeds: [Embeds.info(text, 'Say', '', '', '')] })
-                res.sendStatus(200)
-            } else {
-                res.sendStatus(406)
+				chan.send({ embeds: [Embeds.info(text, 'Say', '', '', '')] })
+				res.sendStatus(200)
+			} else {
+				res.sendStatus(406)
 			}
-		});
+		})
 		this.app.post('/ping', (req: any, res: any) => {
 			const _token = req.body.token
 			const channelid = req.body.channelId
 			const guild = this.client.guilds.cache.get('990521467215171594')
 
 			if(!_token || !channelid)
-                return res.sendStatus(400);
+				return res.sendStatus(400)
     
-            if (!this.checkToken(_token))
-                return res.sendStatus(401)
+			if (!this.checkToken(_token))
+				return res.sendStatus(401)
 
 			const chan = guild?.channels.cache.get(channelid)
 
 			if (chan) {
-                chan.send({ embeds: [Embeds.info(`${this.client.ws.ping}ms`, 'Ping', '', '', '')] })
-                res.sendStatus(200)
-            } else {
-                res.sendStatus(406)
+				chan.send({ embeds: [Embeds.info(`${this.client.ws.ping}ms`, 'Ping', '', '', '')] })
+				res.sendStatus(200)
+			} else {
+				res.sendStatus(406)
 			}
-		});
+		})
 	}
 }
 
