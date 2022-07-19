@@ -1,4 +1,4 @@
-# ichiro2.0
+# norikita
 
 npm install ////
 yarn install
