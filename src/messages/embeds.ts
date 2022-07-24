@@ -7,7 +7,7 @@ const footerURL = 'https://cdn.discordapp.com/avatars/655423421110550558/a_f2535
 
 export function info(cont: string, title: string, url: string, thumb: string, img: string) {
 	const emb = new MessageEmbed()
-		.setColor(colours.blue)
+		.setColor('#16A085')
 		.setDescription(cont)
 		.setTimestamp()
 		.setFooter(footerName, footerURL)
@@ -28,7 +28,7 @@ export function info(cont: string, title: string, url: string, thumb: string, im
 
 export function nsfw(cont: string, title: string, url: string, thumb: string, img: string) {
 	const emb = new MessageEmbed()
-		.setColor('#C0392B')
+		.setColor('#E74C3C')
 		.setDescription(cont)
 		.setTimestamp()
 		.setFooter(footerName, footerURL)
@@ -49,7 +49,7 @@ export function nsfw(cont: string, title: string, url: string, thumb: string, im
 
 export function error(cont: string, title: string, url: string, thumb: string, img: string) {
 	const emb = new MessageEmbed()
-		.setColor(colours.red)
+		.setColor('#C0392B')
 		.setDescription(cont)
 		.setTimestamp()
 		.setFooter(footerName, footerURL)
@@ -70,7 +70,7 @@ export function error(cont: string, title: string, url: string, thumb: string, i
 
 export function succes(cont: string, title: string, url: string, thumb: string, img: string) {
 	const emb = new MessageEmbed()
-		.setColor(colours.green)
+		.setColor('#2ECC71')
 		.setDescription(cont)
 		.setTimestamp()
 		.setFooter(footerName, footerURL)
@@ -91,7 +91,7 @@ export function succes(cont: string, title: string, url: string, thumb: string, 
 
 export function mod(cont: string, title: string, url: string, thumb: string, img: string) {
 	const emb = new MessageEmbed()
-		.setColor(colours.orange)
+		.setColor('#F39C12')
 		.setDescription(cont)
 		.setTimestamp()
 		.setFooter(footerName, footerURL)
@@ -112,7 +112,7 @@ export function mod(cont: string, title: string, url: string, thumb: string, img
 
 export function log(cont: string, title: string, url: string, thumb: string, img: string) {
 	const emb = new MessageEmbed()
-		.setColor(colours.yellow)
+		.setColor('#F1C40F')
 		.setDescription(cont)
 		.setTimestamp()
 		.setFooter(footerName, footerURL)

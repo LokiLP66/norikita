@@ -40,7 +40,7 @@ export default {
 	category: 'Test',
 	description: 'Creates an embed pagination.',
 
-	slash: 'both',
+	slash: true,
 	testOnly: true,
 
 	callback: async ({ user, message, interaction, channel }) => {

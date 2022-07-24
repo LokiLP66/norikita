@@ -10,7 +10,7 @@ export default {
 	expectedArgs: '<user> <reason>',
 	expectedArgsTypes: ['USER', 'STRING'],
 
-	slash: 'both',
+	slash: true,
 	testOnly: false,
 
 	permissions: ['KICK_MEMBERS'],

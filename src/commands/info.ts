@@ -10,7 +10,7 @@ export default {
 	maxArgs: 2,
 	expectedArgs: '<about> <member>',
 
-	slash: 'both',
+	slash: true,
 	testOnly: false,
 
 	options: [

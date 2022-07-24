@@ -9,7 +9,7 @@ export default {
 	minArgs: 1,
 	expectedArgs: '<text>',
 
-	slash: 'both',
+	slash: true,
 
 	testOnly: true,
 	ownerOnly: true,

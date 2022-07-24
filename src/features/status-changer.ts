@@ -1,21 +1,20 @@
-import { Client } from 'discord.js'
+import { ActivityType, Client } from 'discord.js'
 
 export default (client: Client) => {
 	const statusOptions = [
 		'/help',
-		'[prefix]help',
 		'by Kamachi#6622',
 	]
 	let counter = 0
 
 	const updateStatus = () => {
 		client.user?.setPresence({
-			status: 'online',
+			status: 'dnd',
 			activities: [
 				{
-					name: statusOptions[counter]
+					name: statusOptions[counter],
+					type: 'WATCHING',
 				}
-                
 			]
 		})
 

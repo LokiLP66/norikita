@@ -6,7 +6,7 @@ export default {
 	category: 'Help',
 	description: 'Searches the official MDN documentation.',
 
-	slash: 'both',
+	slash: true,
 
 	testOnly: false,
 	guildOnly: false,

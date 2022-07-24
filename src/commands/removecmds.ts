@@ -6,7 +6,7 @@ export default {
 	category: 'Test',
 	description: 'Replies with the bot ping.',
 
-	slash: 'both',
+	slash: true,
 	testOnly: false,
 
 	ownerOnly: true,

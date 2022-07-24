@@ -8,7 +8,7 @@ export default {
 	category: 'Servers',
 	description: 'Creates a temporary channel.',
 
-	slash: 'both',
+	slash: true,
 	testOnly: false,
 
 	minArgs: 2,

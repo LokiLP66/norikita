@@ -12,7 +12,7 @@ export default {
 	minArgs: 1,
 	expectedArgs: '<role>',
 
-	slash: 'both',
+	slash: true,
 	
 	testOnly: false,
 	hidden: true,

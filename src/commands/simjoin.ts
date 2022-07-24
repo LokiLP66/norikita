@@ -5,9 +5,11 @@ export default {
 	category: 'Simulation',
 	description: 'Simulates a user joining the server.',
 
-	slash: 'both',
+	slash: true,
 	
 	testOnly: false,
+	guildOnly: true,
+	
 	hidden: true,
 
 	permissions: ['ADMINISTRATOR'],

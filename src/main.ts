@@ -5,23 +5,28 @@ import { Client, Intents } from 'discord.js'
 const { secrets, ids } = require('./data/config.json')
 import WOKCommands from 'wokcommands'
 import path from 'path'
-import Webpanel from './server/webpanel'
-const { createAudioPlayer } = require('@discordjs/voice')
+import discordModals from 'discord-modals'
 
 
 // ////////////////////////////////////////////////////////////////////
 // CONNECT
 // ////////////////////////////////////////////////////////////////////
 
-const client = new Client({
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_VOICE_STATES],
-	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
+const client = new Client<boolean>({
+	intents: [
+		Intents.FLAGS.GUILDS,
+		Intents.FLAGS.GUILD_MESSAGES,
+		Intents.FLAGS.GUILD_MEMBERS,
+		Intents.FLAGS.GUILD_PRESENCES,
+		Intents.FLAGS.GUILD_VOICE_STATES,
+		Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+		Intents.FLAGS.DIRECT_MESSAGES,
+		Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
+		Intents.FLAGS.DIRECT_MESSAGE_TYPING,
+	],
 })
 
-export const player = createAudioPlayer()
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const wp = new Webpanel(secrets.webtoken, ids.port, client)
+discordModals(client)
 
 client.on('ready', async () => {
 	const commands = new WOKCommands(client, {
@@ -33,11 +38,7 @@ client.on('ready', async () => {
 		botOwners: ['655423421110550558'],
 	})
 
-	commands.setColor('#2ecc71')
-
-	commands.setDefaultPrefix('~')
-
-	commands.setDisplayName('Norikita')
+	commands.setDisplayName('Fumiko')
 
 	commands.setDefaultLanguage('english')
 
@@ -76,6 +77,10 @@ client.on('ready', async () => {
 	])
 
 	client.user?.setStatus('dnd')
+})
+
+client.on('modalSubmit', async (modal) => {
+	modal.reply('Thank you for answering the form!')
 })
 
 // ////////////////////////////////////////////////////////////////////

@@ -6,7 +6,7 @@ export default {
 	category: 'Server',
 	description: 'Creates a new help ticket.',
 
-	slash: 'both',
+	slash: true,
 	testOnly: false,
 
 	minArgs: 1,

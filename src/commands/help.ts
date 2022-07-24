@@ -7,10 +7,11 @@ export default {
 	category: 'Help',
 	description: 'Replies with the help for the bot.',
 
-	slash: 'both',
+	slash: true,
 	testOnly: false,
+	guildOnly: true,
 
-	callback: async ({ instance, user, channel, prefix, message, interaction, client }) => {
+	callback: async ({ instance, user, channel, message, interaction, client }) => {
 		const embeds: MessageEmbed[] = []
 		const pages = {} as { [key: string]: number }
 
@@ -24,11 +25,9 @@ export default {
 					.setColor('BLURPLE')
 				instance.commandHandler.commands.forEach((command: any) => {
 					if (command.category == entry[0]) {
-						if (!interaction) {
-							emb.addField(`${prefix}${command.names[0]}`, `${command.description}\n${command.syntax}`)
-						} else {
-							emb.addField(`/${command.names[0]}`, `${command.description}\n${command.syntax}`)
-						}
+						emb.addFields([
+							{ name: `/${command.names[0]}`, value: `${command.description}\n${command.syntax}`}
+						])
 					}
 				})
 				embeds.push(emb)
@@ -88,7 +87,7 @@ export default {
 		// eslint-disable-next-line prefer-const
 		collector = channel.createMessageComponentCollector({ filter, time })
 
-		collector.on('collect', (btnInt) => {
+		collector?.on('collect', (btnInt) => {
 			if (!btnInt) {
 				return
 			}

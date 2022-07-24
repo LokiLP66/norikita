@@ -1,7 +1,8 @@
 /* eslint-disable indent */
-import { error, info, succes } from '../messages/embeds'
+import { error, info } from '../messages/embeds'
 import { ICommand } from 'wokcommands'
-import { Client, DMChannel, GuildMember, MessageActionRow, MessageSelectMenu, MessageSelectOptionData, Role, TextChannel } from 'discord.js'
+import { Client, GuildMember, Role, TextChannel, MessageActionRowComponent, SelectMenuInteraction, MessageSelectMenu, MessageActionRowComponentResolvable, MessageSelectOptionData, MessageActionRow } from 'discord.js'
+import { ActionRowBuilder, SelectMenuBuilder } from '@discordjs/builders'
 
 export default {
 	category: 'Servers',
@@ -14,7 +15,7 @@ export default {
 	expectedArgs: '<channel> <messageid> <role>',
 	expectedArgsTypes: ['CHANNEL', 'STRING', 'ROLE'],
 
-	slash: 'both',
+	slash: true,
 
 	testOnly: false,
 	guildOnly: true,
@@ -29,7 +30,7 @@ export default {
 
             if (customId === 'auto_roles' && member instanceof GuildMember) {
                 const component = interaction.component as MessageSelectMenu
-                const removed = component.options.filter((option) => {
+                const removed = component.options.filter((option: { value: string }) => {
                     return !values.includes(option.value)
                 })
 
@@ -50,27 +51,20 @@ export default {
     },
 
 	callback: async ({ message, interaction, args, client, channel, guild }) => {
-		const chan = (
-            message 
-                ? message.mentions.channels.first() 
-                : interaction.options.getChannel('channel')
-        ) as TextChannel
+		const chan = interaction.options.getChannel('channel')
 		if (!chan || chan.type !== 'GUILD_TEXT') {
 			channel.send({ embeds: [error('Please tag a text channel.', 'Error', '', '', '')] })
 		}
 
         const messageId = args[1]
 
-		const role = (
-            message 
-                ? message.mentions.roles.first() 
-                : interaction.options.getRole('role')
-        ) as Role
-		if (role !== guild?.roles.cache.get(role.id)) {
+		const role = interaction.options.getRole('role') as Role
+
+		if (role !== guild?.roles.cache.get((role as unknown as Role).id)) {
 			channel.send({ embeds: [error('Unknown role.', 'Error', '', '', '')] })
 		}
 
-        const targetMessage = await chan.messages.fetch(messageId, {
+        const targetMessage = await (chan as unknown as TextChannel).messages.fetch(messageId, {
             cache: true,
             force: true,
         })
@@ -82,8 +76,9 @@ export default {
 		}
 
         let row = targetMessage.components[0] as MessageActionRow
+        
         if (!row) {
-            row = new MessageActionRow()
+            row = new MessageActionRow
 			channel.send({ embeds: [error('Unknown role.', 'Error', '', '', '')] })
 		}
 

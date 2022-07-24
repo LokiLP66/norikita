@@ -1,6 +1,8 @@
 /* eslint-disable indent */
 import { Client, Role } from 'discord.js'
 import rainbowSchema from '../models/rainbow-schema'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const colours = require('../data/config.json')
 
 const rainbowData = {} as {
     [key: string]: [Role]
@@ -21,43 +23,26 @@ export default (client: Client) => {
 			data = rainbowData[guild.id] = [roleId]
 		}
 
-        type ColorsResolvable = [
-            '#D32F2F',
-            '#F44336',
-            '#E64A19',
-            '#FF5722',
-            '#F9A825',
-            '#FFEB3B',
-            '#558B2F',
-            '#2E7D32',
-            '#283593',
-            '#3F51B5',
-            '#6A1B9A',
-            '#673AB7'
+        const colourOptions = [
+            colours.red.aaa,
         ]
 
-        const colours: ColorsResolvable = [
-            '#D32F2F',
-            '#F44336',
-            '#E64A19',
-            '#FF5722',
-            '#F9A825',
-            '#FFEB3B',
-            '#558B2F',
-            '#2E7D32',
-            '#283593',
-            '#3F51B5',
-            '#6A1B9A',
-            '#673AB7'
-        ]
+        let counter = 0
 
-        setInterval(() => {
-            const r_colours = colours[Math.floor(Math.random() * colours.length)]
-            guild?.roles.edit(data[0], { color: r_colours})
-            .then()
-            .catch(console.error)
-        }, 1000 * 60 * 0.5)
-	})
+        const updateRole = () => {
+
+            guild?.roles.edit(data[0], { color: colourOptions[counter]})
+                .then()
+                .catch(console.error)
+
+            if (++counter >= colourOptions.length) {
+                counter = 0
+            }
+
+            setTimeout(updateRole, 1000 * 60 * 0.5)
+        }
+        updateRole()
+    })
 }
 
 export const config = {
