@@ -1,4 +1,4 @@
-import { info } from '../messages/embeds'
+import { info } from '../../messages/embeds'
 import { ICommand } from 'wokcommands'
 import DJS, { TextChannel } from 'discord.js'
 

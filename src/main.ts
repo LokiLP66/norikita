@@ -29,6 +29,13 @@ const client = new Client<boolean>({
 discordModals(client)
 
 client.on('ready', async () => {
+	// own command handler (for context menus)
+	let handler = require('./command-handler')
+	if (handler.default) handler = handler.default
+
+	handler(client)
+
+	// wokcommands
 	const commands = new WOKCommands(client, {
 		commandsDir: path.join(__dirname, 'commands'),
 		featuresDir: path.join(__dirname, 'features'),
@@ -37,11 +44,8 @@ client.on('ready', async () => {
 		mongoUri: secrets.mongodb,
 		botOwners: ['655423421110550558'],
 	})
-
 	commands.setDisplayName('Fumiko')
-
 	commands.setDefaultLanguage('english')
-
 	commands.setCategorySettings([
 		{
 			name: 'Help',
@@ -75,7 +79,7 @@ client.on('ready', async () => {
 			hidden: true,
 		},
 	])
-
+	// status
 	client.user?.setStatus('dnd')
 })
 

@@ -2,7 +2,7 @@ import { MessageEmbed } from 'discord.js'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { colours } = require('../data/config.json')
 
-const footerName = 'by Kamachi#6622'
+const footerName = 'by Kamachi#0001'
 const footerURL = 'https://cdn.discordapp.com/avatars/655423421110550558/a_f25351f243575fb8a92f246d8302529a.png'
 
 export function info(cont: string, title: string, url: string, thumb: string, img: string) {
@@ -10,7 +10,10 @@ export function info(cont: string, title: string, url: string, thumb: string, im
 		.setColor('#16A085')
 		.setDescription(cont)
 		.setTimestamp()
-		.setFooter(footerName, footerURL)
+		.setFooter({
+			text: footerName,
+			iconURL: footerURL
+		})
 	if (title) {
 		emb.setTitle(title)
 	}
@@ -31,7 +34,10 @@ export function nsfw(cont: string, title: string, url: string, thumb: string, im
 		.setColor('#E74C3C')
 		.setDescription(cont)
 		.setTimestamp()
-		.setFooter(footerName, footerURL)
+		.setFooter({
+			text: footerName,
+			iconURL: footerURL
+		})
 	if (title) {
 		emb.setTitle(title)
 	}
@@ -52,7 +58,10 @@ export function error(cont: string, title: string, url: string, thumb: string, i
 		.setColor('#C0392B')
 		.setDescription(cont)
 		.setTimestamp()
-		.setFooter(footerName, footerURL)
+		.setFooter({
+			text: footerName,
+			iconURL: footerURL
+		})
 	if (title) {
 		emb.setTitle(title)
 	}
@@ -73,7 +82,10 @@ export function succes(cont: string, title: string, url: string, thumb: string, 
 		.setColor('#2ECC71')
 		.setDescription(cont)
 		.setTimestamp()
-		.setFooter(footerName, footerURL)
+		.setFooter({
+			text: footerName,
+			iconURL: footerURL
+		})
 	if (title) {
 		emb.setTitle(title)
 	}
@@ -94,7 +106,10 @@ export function mod(cont: string, title: string, url: string, thumb: string, img
 		.setColor('#F39C12')
 		.setDescription(cont)
 		.setTimestamp()
-		.setFooter(footerName, footerURL)
+		.setFooter({
+			text: footerName,
+			iconURL: footerURL
+		})
 	if (title) {
 		emb.setTitle(title)
 	}
@@ -115,7 +130,10 @@ export function log(cont: string, title: string, url: string, thumb: string, img
 		.setColor('#F1C40F')
 		.setDescription(cont)
 		.setTimestamp()
-		.setFooter(footerName, footerURL)
+		.setFooter({
+			text: footerName,
+			iconURL: footerURL
+		})
 	if (title) {
 		emb.setTitle(title)
 	}

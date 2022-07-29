@@ -1,5 +1,5 @@
-import { succes, error } from '../messages/embeds'
-import welcomeSchema from '../models/welcome-schema'
+import { succes, error } from '../../messages/embeds'
+import welcomeSchema from '../../models/welcome-schema'
 import { ICommand } from 'wokcommands'
 import DJS from 'discord.js'
 

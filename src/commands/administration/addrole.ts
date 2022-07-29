@@ -1,8 +1,7 @@
 /* eslint-disable indent */
-import { error, info } from '../messages/embeds'
+import { error, info } from '../../messages/embeds'
 import { ICommand } from 'wokcommands'
-import { Client, GuildMember, Role, TextChannel, MessageActionRowComponent, SelectMenuInteraction, MessageSelectMenu, MessageActionRowComponentResolvable, MessageSelectOptionData, MessageActionRow } from 'discord.js'
-import { ActionRowBuilder, SelectMenuBuilder } from '@discordjs/builders'
+import DJS, { Client, GuildMember, Role, TextChannel, MessageSelectMenu, MessageSelectOptionData, MessageActionRow } from 'discord.js'
 
 export default {
 	category: 'Servers',
@@ -11,9 +10,35 @@ export default {
 	permissions: ['ADMINISTRATOR'],
 
 	minArgs: 3,
-	maxArgs: 3,
-	expectedArgs: '<channel> <messageid> <role>',
-	expectedArgsTypes: ['CHANNEL', 'STRING', 'ROLE'],
+	maxArgs: 4,
+	expectedArgs: '<channel> <messageid> <role> <emoji>',
+
+    options: [
+        {
+			name: 'channel',
+			description: 'Please enter a channel!',
+			required: true,
+			type: DJS.Constants.ApplicationCommandOptionTypes.CHANNEL
+		},
+        {
+			name: 'messageid',
+			description: 'Please enter a messageId!',
+			required: true,
+			type: DJS.Constants.ApplicationCommandOptionTypes.STRING
+		},
+        {
+			name: 'role',
+			description: 'Please enter a role!',
+			required: true,
+			type: DJS.Constants.ApplicationCommandOptionTypes.ROLE
+		},
+        {
+			name: 'emoji',
+			description: 'Please enter a emoji!',
+			required: false,
+			type: DJS.Constants.ApplicationCommandOptionTypes.STRING
+		},
+    ],
 
 	slash: true,
 
@@ -60,7 +85,7 @@ export default {
 
 		const role = interaction.options.getRole('role') as Role
 
-		if (role !== guild?.roles.cache.get((role as unknown as Role).id)) {
+		if (role !== guild?.roles.cache.get(role.id)) {
 			channel.send({ embeds: [error('Unknown role.', 'Error', '', '', '')] })
 		}
 
@@ -82,9 +107,12 @@ export default {
 			channel.send({ embeds: [error('Unknown role.', 'Error', '', '', '')] })
 		}
 
+        const emoji = interaction.options.getString('emoji') as string
+
         const option: MessageSelectOptionData[] = [{
             label: role.name,
             value: role.id,
+            emoji: emoji
         }]
 
         // eslint-disable-next-line prefer-const

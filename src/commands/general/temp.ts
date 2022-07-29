@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-import { info, error } from '../messages/embeds'
+import { info, error } from '../../messages/embeds'
 import { ICommand } from 'wokcommands'
 import DJS from 'discord.js'
 

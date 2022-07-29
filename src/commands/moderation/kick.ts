@@ -1,4 +1,4 @@
-import { error, info } from '../messages/embeds'
+import { error, info } from '../../messages/embeds'
 import { ICommand } from 'wokcommands'
 import DJS, { GuildMember } from 'discord.js'
 

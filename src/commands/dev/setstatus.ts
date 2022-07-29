@@ -1,5 +1,5 @@
 import { ICommand } from 'wokcommands'
-import { info } from '../messages/embeds'
+import { info } from '../../messages/embeds'
 
 export default {
 

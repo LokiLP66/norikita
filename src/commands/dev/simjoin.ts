@@ -1,4 +1,4 @@
-import { succes } from '../messages/embeds'
+import { succes } from '../../messages/embeds'
 import { ICommand } from 'wokcommands'
 
 export default {

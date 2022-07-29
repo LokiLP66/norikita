@@ -1,5 +1,5 @@
-import { succes, error } from '../messages/embeds'
-import rainbowSchema from '../models/rainbow-schema'
+import { succes, error } from '../../messages/embeds'
+import rainbowSchema from '../../models/rainbow-schema'
 import { ICommand } from 'wokcommands'
 import DJS from 'discord.js'
 
