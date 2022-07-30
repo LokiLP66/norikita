@@ -37,15 +37,38 @@ export default {
 		},
 	],
 
-	callback: async ({ interaction, channel }) => {
+	callback: async ({ interaction, channel, guild }) => {
 		const string = interaction.options.getString('type')
 
-		if (!channel.nsfw) {
-			interaction.reply({ embeds: [error('Please use this command in a NSFW channel.', 'Error', '', '', '')], ephemeral: true })
-			channel.setNSFW(true, 'cause')
-			return
-		} 
-		else {
+		if (channel.guild) {
+			if (!channel.nsfw) {
+				interaction.reply({ embeds: [error('Please use this command in a NSFW channel.', 'Error', '', '', '')], ephemeral: true })
+				channel.setNSFW(true, 'cause')
+				return
+			} else {
+				if (string == 'vanilla') {
+					await interaction.reply({embeds: [nsfw(`Type: ${string}`, 'Hentai!', '', '', await akaneko.nsfw.hentai())]})
+				} else if (string == 'maid') {
+					await interaction.reply({embeds: [nsfw(`Type: ${string}`, 'Hentai!', '', '', await akaneko.nsfw.maid())]})
+				} else if (string == 'succubus') {
+					await interaction.reply({embeds: [nsfw(`Type: ${string}`, 'Hentai!', '', '', await akaneko.nsfw.succubus())]})
+				} else if (string == 'tentacles') {
+					await interaction.reply({embeds: [nsfw(`Type: ${string}`, 'Hentai!', '', '', await akaneko.nsfw.tentacles())]})
+				} else if (string == 'foxgirl') {
+					await interaction.reply({embeds: [nsfw(`Type: ${string}`, 'Hentai!', '', '', await akaneko.nsfw.foxgirl())]})
+				} else if (string == 'bdsm') {
+					await interaction.reply({embeds: [nsfw(`Type: ${string}`, 'Hentai!', '', '', await akaneko.nsfw.bdsm())]})
+				} else if (string == 'doujin') {
+					await interaction.reply({embeds: [nsfw(`Type: ${string}`, 'Hentai!', '', '', await akaneko.nsfw.doujin())]})
+				} else if (string == 'thighs') {
+					await interaction.reply({embeds: [nsfw(`Type: ${string}`, 'Hentai!', '', '', await akaneko.nsfw.thighs())]})
+				} else if (string == 'masturbation') {
+					await interaction.reply({embeds: [nsfw(`Type: ${string}`, 'Hentai!', '', '', await akaneko.nsfw.masturbation())]})
+				} else {
+					await interaction.reply({ embeds: [error('Invalid input!', 'Error', '', '', '')] })
+				}
+			}
+		} else {
 			if (string == 'vanilla') {
 				await interaction.reply({embeds: [nsfw(`Type: ${string}`, 'Hentai!', '', '', await akaneko.nsfw.hentai())]})
 			} else if (string == 'maid') {

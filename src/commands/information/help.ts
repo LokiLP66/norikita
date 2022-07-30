@@ -11,16 +11,18 @@ export default {
 	testOnly: false,
 	guildOnly: true,
 
-	callback: async ({ instance, user, channel, message, interaction, client }) => {
+	callback: async ({ instance, user, channel, message, interaction, guild, client }) => {
 		const embeds: MessageEmbed[] = []
 		const pages = {} as { [key: string]: number }
+
+		const bot = guild?.members.cache.get(client.user?.id as string)
 
 		for (let a = 0; a < 1; ++a) {
 			const entries = instance.categories.entries()
 			// eslint-disable-next-line prefer-const
 			for (let entry of entries) {
 				const emb = new MessageEmbed()
-					.setTitle(`${client.user?.username}s Help Menu`)
+					.setTitle(`${bot?.displayName}'s Help Menu`)
 					.setDescription(`${entry[1]} ${entry[0]}`)
 					.setColor('BLURPLE')
 				instance.commandHandler.commands.forEach((command: any) => {

@@ -29,12 +29,6 @@ const client = new Client<boolean>({
 discordModals(client)
 
 client.on('ready', async () => {
-	// own command handler (for context menus)
-	let handler = require('./command-handler')
-	if (handler.default) handler = handler.default
-
-	handler(client)
-
 	// wokcommands
 	const commands = new WOKCommands(client, {
 		commandsDir: path.join(__dirname, 'commands'),
